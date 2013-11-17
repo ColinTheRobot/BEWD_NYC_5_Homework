@@ -6,8 +6,9 @@ class Story
    end
 
    def to_s
-      puts "Author: #{@author}"
-      puts "Title: #{@title}"
-      puts "#{@content}"
+      "Author: #{author}\n Title: #{title}\n #{content}\n"
    end
+
+   private
+   attr_reader :author, :title, :content
 end
