@@ -1,7 +1,8 @@
 require 'rubygems'
 require 'json'
 require 'twitter'
-require 'geocoder'
+
+require_relative 'geocode_address.rb'
 
 client = Twitter.configure do |config| 
         config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
@@ -21,7 +22,9 @@ puts "That's a great area. We haven't been, but we hear it's a lovely location."
 puts "Within how great of a radius would you like to see these tweets? ex: '1mi/km', '2mi/km'"  #asks for radius
 radius = gets.chomp
 
-c = Geocoder.coordinates("#{address}")
+lat_long = Request.new address
+c = lat_long.coordinates
+# c = Geocoder.coordinates("#{address}")
 
 #instatiating object
 result = client.search("#{topic}", {geocode:"#{c.first},#{c.last},#{radius}"}).statuses
